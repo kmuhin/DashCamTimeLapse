@@ -63,11 +63,12 @@ if not exist "%tmp%" (
     goto END
 )
 
+pause
 rem Запускаю слияние файлов
 "%cmd_ffmpeg%" -f concat -safe 0 -i %tmp% -c copy "%filename_concat%"
 echo  
 
 rem Запускаю следующий скрипт
-start "" timer.cmd t_speed8_cuda.cmd
+start "" timer.cmd custom_date_3_convert.cmd
 
 :END

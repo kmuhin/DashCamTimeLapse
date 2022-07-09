@@ -1,6 +1,6 @@
 @echo off
 rem только поменяй дату здесь
-set filemaskdate=2022-05-24
+set filemaskdate=2022-07-03
 
 set dashcam_drive=D:
 set videos_dir=videos
@@ -27,4 +27,4 @@ if not exist "%videos_dir%" (
     mkdir "%videos_dir%"
 )
 
-start "" timer.cmd t_concat_mkv_event.cmd
+start "" timer.cmd custom_date_2_concat.cmd
