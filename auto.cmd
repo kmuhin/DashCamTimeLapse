@@ -13,8 +13,11 @@ set history_tmp=history_dates.tmp
 if not exist "%videos_dir%" (
     mkdir "%videos_dir%"
 )
-
-
+:: Получить дату из имени файла.
+:: set tmpdate=!tmpvar:~4,8%!
+:: маски файлов регистратора в файле auto_2_concat.cmd
+:: set file_mask_normal=FILE%file_mask%
+:: set file_mask_event=EMER%file_mask%
 SETLOCAL EnableDelayedExpansion
 
 if not exist "%history_dates%" (
@@ -22,13 +25,13 @@ if not exist "%history_dates%" (
 )
 del "%history_tmp%"
 
-for /F "tokens=*" %%i in ('dir /b /o:N D:\Normal') do (
+for /F "tokens=*" %%i in ('dir /b /o:N "%dashcam_drive%\Normal"') do (
     set tmpvar=%%i
     set tmpdate=!tmpvar:~4,8%!
     call :maketmpincludes !tmpdate!
 )
 
-for /F "tokens=*" %%i in ('dir /b /o:N D:\Event') do (
+for /F "tokens=*" %%i in ('dir /b /o:N "%dashcam_drive%\Event'") do (
     set tmpvar=%%i
     set tmpdate=!tmpvar:~4,8%!
     call :maketmpincludes !tmpdate!
