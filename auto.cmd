@@ -31,7 +31,7 @@ for /F "tokens=*" %%i in ('dir /b /o:N "%dashcam_drive%\Normal"') do (
     call :maketmpincludes !tmpdate!
 )
 
-for /F "tokens=*" %%i in ('dir /b /o:N "%dashcam_drive%\Event'") do (
+for /F "tokens=*" %%i in ('dir /b /o:N "%dashcam_drive%\Event"') do (
     set tmpvar=%%i
     set tmpdate=!tmpvar:~4,8%!
     call :maketmpincludes !tmpdate!
