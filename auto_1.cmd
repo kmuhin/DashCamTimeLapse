@@ -4,7 +4,7 @@ set dashcam_drive=D:
 set videos_dir=videos
 set history_dates=history_dates.txt
 set file_prefix=auto
-set last_date_file=%file_prefix%.txt
+set last_date_file=last_date.txt
 set cmd_ffmpeg=ffmpeg
 set cmd_ffmpeg_opt=-hide_banner
 set cmd_concat=%file_prefix%_2_concat.cmd
@@ -23,19 +23,14 @@ if not exist "%videos_dir%" (
 :: set file_mask_event=EMER%file_mask%
 SETLOCAL EnableDelayedExpansion
 
-if not exist "%last_date_file%" (
-    set last_date=0
-) else (
-    set /p last_date=<"%last_date_file%"
-)
-echo Last date: %last_date%
-
+call :read_last_date
 for /F "tokens=*" %%i in ('dir /b /o:N "%dashcam_drive%\Normal"') do (
     set tmpvar=%%i
     set tmpdate=!tmpvar:~4,13%!
     call :continue_date !tmpdate!
 )
 
+call :read_last_date
 for /F "tokens=*" %%i in ('dir /b /o:N "%dashcam_drive%\Event"') do (
     set tmpvar=%%i
     set tmpdate=!tmpvar:~4,13%!
@@ -65,6 +60,15 @@ goto end
     call "%cmd_convert%"
     if %ERRORLEVEL% NEQ 0 EXIT /B 1
     :: возвращаюсь к циклу
+    EXIT /B
+
+:read_last_date
+    if not exist "%last_date_file%" (
+        set last_date=0
+    ) else (
+        set /p last_date=<"%last_date_file%"
+    )
+    echo Last date: %last_date%
     EXIT /B
 
 :end
