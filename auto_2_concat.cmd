@@ -65,7 +65,7 @@ if not exist "%tmp%" (
 )
 
 :: Запускаю слияние файлов
-"%cmd_ffmpeg%" %cmd_ffmpeg_opt% -f concat -safe 0 -i "%tmp%" -c copy "%filename_concat%"
+"%cmd_ffmpeg%" %cmd_ffmpeg_opt% -f concat -safe 0 -i "%tmp%" -c copy -scodec copy "%filename_concat%"
 if %ERRORLEVEL% EQU 0 echo !cur_last_dt! > "%last_date_file%"
 echo  
 

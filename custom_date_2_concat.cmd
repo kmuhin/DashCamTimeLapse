@@ -65,7 +65,7 @@ if not exist "%tmp%" (
 
 pause
 rem Запускаю слияние файлов
-"%cmd_ffmpeg%" -f concat -safe 0 -i %tmp% -c copy "%filename_concat%"
+"%cmd_ffmpeg%" -f concat -safe 0 -i %tmp% -c copy -scodec copy "%filename_concat%"
 echo  
 
 rem Запускаю следующий скрипт
